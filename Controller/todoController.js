@@ -1,10 +1,9 @@
 import todoCollection from "../Model/todoModel.js";
-import ToDoCollection from "../Model/todoModel.js";
 
 
 export const addToDo = async (req, res) => {
     try {
-        const data = new ToDoCollection(req.body);
+        const data = new todoCollection(req.body);
         await data.save()
         res.status(201).json({ mess: "data has been stored" })
     } catch (err) {
@@ -30,11 +29,11 @@ export const updateToDo = async (req, res) => {
     }
 }
 
-export const deleteToDo =  async (req,res) => {
-    try{
+export const deleteToDo = async (req, res) => {
+    try {
         await todoCollection.findByIdAndDelete(req.params.id)
-        res.json({message:"data has been deleted"})
-        }catch(err){
-            res.status(500).json({message:err})
-        }
+        res.json({ message: "data has been deleted" })
+    } catch (err) {
+        res.status(500).json({ message: err })
     }
+}

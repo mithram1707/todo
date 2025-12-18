@@ -1,18 +1,22 @@
-//will handle connectivity between express and mongodb
-// for commmonjs => const mongoose = require('mongoose')
-import mongoose from "mongoose";    // modules
-import dotenv from 'dotenv';
-
+import mongoose from 'mongoose'
+import dotenv from 'dotenv'
 dotenv.config();
-
-const connectDB = () => {
+const connectDb = async () => {
     try {
-        //'mongodb://127.0.0.1:27017/sece_todo'
-        mongoose.connect(process.env.MONGODB_URL);
-        console.log("db has been connected")
-    } catch (err) { console.log(err) }
-
+        await mongoose.connect(process.env.MONGODB_URL, {
+            serverSelectionTimeoutMS: 30000,
+            socketTimeoutMS: 45000,
+            family: 4
+        });
+        console.log("MongoDB Connected Successfully");
+    } catch (err) {
+        console.log("Atlas connection failed, trying local MongoDB...");
+        try {
+            await mongoose.connect("mongodb://127.0.0.1:27017/sece_todo");
+            console.log("Local MongoDB Connected Successfully");
+        } catch (localErr) {
+            console.error("All MongoDB connections failed. Server running without database.");
+        }
+    }
 }
-
-
-export default connectDB;
+export default connectDb

@@ -1,11 +1,9 @@
-import { addToDo ,getToDo,updateToDo,deleteToDo} from "../Controller/todocontroller.js";
-import express from "express";
+import { addTodo, getTodo, updateTodo, deleteTodo } from "../Controller/todocontroller.js";
+import express from 'express';
+
 const route = express.Router();
-
-route.post("/addtodo", addToDo);
-route.get("/gettodo", getToDo);
-route.put("/updatetodo", updateToDo);
-route.delete("/deletetodo/:id", deleteToDo);
-
-
+route.post('/addtodo', addTodo);
+route.get('/gettodo', getTodo);
+route.put('/updatetodo/:id', updateTodo);
+route.delete('/deletetodo/:id', deleteTodo);
 export default route;

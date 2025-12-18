@@ -1,12 +1,8 @@
-//define ur local schema 
+import mongoose from 'mongoose'
 
-import mongoose from "mongoose";
+const todoschema = mongoose.Schema({
+    todo: { type: String, required: true, unique: true }
+});
 
-//todo document structure
-const todoSchema = mongoose.Schema({
-    todo: { type: String, require: true, unique: true }
-})
-//creating collections with name called todos with todoSchema 
-const todoCollection = mongoose.model("todos", todoSchema)
-
+const todoCollection = mongoose.model("todos", todoschema);
 export default todoCollection;
